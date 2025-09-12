@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Rifa {
+  id           String   @id @default(uuid())
+  title        String
+  description  String?
+  price        Float
+  budget      Float
+  imgUrl      String?
+  isActive     Boolean  @default(true)
+  totalTickets Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  tickets      Ticket[]
+}
+
+model Ticket {
+  id                String   @id @default(uuid())
+  number            Int      @unique
+  ticketHolderID    String
+  ticketHolderName  String
+  ticketHolderPhone String
+  ticketHolderEmail String
+  referenceCode     String
+  refImageUrl       String   @default("https://picsum.photos/200")
+  isSold            Boolean  @default(false)
+  rifaId            String
+  rifa              Rifa     @relation(fields: [rifaId], references: [id])
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([number, rifaId])
+}
