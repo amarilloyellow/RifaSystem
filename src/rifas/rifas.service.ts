@@ -111,3 +111,12 @@ export const deleteRifaAndTickets = async (rifaId: string) => {
         });
     });
 };
+
+// Servicio para eliminar un ticket
+export const deleteTicket = async (ticketId: string) => {
+    return await prisma.ticket.delete({
+        where: {
+            id: ticketId
+        },
+    });
+};
