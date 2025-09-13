@@ -8,6 +8,7 @@ import {
     createRifa,
     createTicketsForRifa,
     deleteRifaAndTickets,
+    deleteTicket,
     getAllRifas,
     getRifaById,
     getTicketsByRifaId,
@@ -134,6 +135,19 @@ rifasRouter.delete('/:id/delete', async (req, res) => {
     } catch (error) {
         res.status(400).json({
             error: 'Error al eliminar la rifa y sus tickets'
+        });
+    }
+});
+
+// Ruta para eliminar un ticket
+rifasRouter.delete('/tickets/:ticketId', async (req, res) => {
+    const ticketId: string = req.params.ticketId;
+    try {
+        await deleteTicket(ticketId);
+        res.status(204).send();
+    } catch (error) {
+        res.status(400).json({
+            error: 'Error al eliminar el ticket'
         });
     }
 });
