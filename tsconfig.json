@@ -30,6 +30,7 @@
     // "noUnusedParameters": true,
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
+    "esModuleInterop": true,
 
     // Recommended Options
     "strict": true,

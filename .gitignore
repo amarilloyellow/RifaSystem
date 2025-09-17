@@ -12,3 +12,14 @@ dist
 # Ignore log files
 logs
 *.log
+public/uploads
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+# Ignore IDE-specific files
+.vscode
+.idea
+# Ignore coverage reports
+coverage
+# Ignore temporary files
+tmp
