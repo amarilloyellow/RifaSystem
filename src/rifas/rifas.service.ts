@@ -1,4 +1,5 @@
 // src/rifas/rifas.service.ts
+import type { Prisma } from "@prisma/client";
 import prisma from "../config/prisma.js";
 import type { CreateRifaDto } from "./interfaces/create-rifa.interface.js";
 import type { CreateTicketDto } from "./interfaces/create-tickets.interface.js";
@@ -43,7 +44,7 @@ export const deleteRifa = async (id: string) => {
 // Crear ticket para la rifa y relacionar con la rifa
 export const createTicketsForRifa = async (rifaId: string, data: CreateTicketDto) => {
     // $transation de prisma para crear los tickets en lote
-    const createTicket = prisma.$transaction(async (tx) => {
+    const createTicket = prisma.$transaction(async (tx: Prisma.TransactionClient) => {
         // Verificar si ya se creo el ticket
         const existingTicket = await tx.ticket.findUnique({
             where: {
@@ -96,7 +97,7 @@ export const updateTicket = async (ticketId: string, data: Partial<CreateTicketD
 };  
 // ruta para eliminar una rifa y sus tickets asociados
 export const deleteRifaAndTickets = async (rifaId: string) => {
-    return await prisma.$transaction(async (tx) => {
+    return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
         // Eliminar los tickets asociados a la rifa
         await tx.ticket.deleteMany({
             where: {

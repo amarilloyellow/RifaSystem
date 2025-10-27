@@ -72,6 +72,7 @@ rifasRouter.get('/:id', async (req, res) => {
         });
     }
 });
+
 // Crear tickets para una rifa
 rifasRouter.post('/:id/tickets', async (req, res) => {
     const rifaId: string = req.params.id;
@@ -85,6 +86,7 @@ rifasRouter.post('/:id/tickets', async (req, res) => {
         });
     }
 });
+
 // Obtener todos los tickets de una rifa
 rifasRouter.get('/:id/tickets', async (req, res) => {
     const rifaId: string = req.params.id;
